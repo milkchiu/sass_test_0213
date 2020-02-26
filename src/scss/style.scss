@@ -1,6 +1,25 @@
+.shortCut-img {
+    margin-bottom: 5px;
+}
+
 html {
     touch-action: manipulation;
     height: 100%;
+    /* 橫向排列，且垂直置中的外觀 */
+    @mixin flexBox($direction) {
+        display: flex;
+        flex-direction: $direction;
+    }
+    @mixin flexAlign($alignItems, $justifyContent) {
+        align-items: $alignItems;
+        justify-content: $justifyContent;
+    }
+    @mixin boxSizing {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+    }
     body {
         font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         touch-action: manipulation;
@@ -8,21 +27,28 @@ html {
         .img-1per {
             width: 100%;
             height: auto;
+            display: block;
         }
         .main-wrap {
             position: absolute;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-around;
+            @include flexBox(column);
+            @include flexAlign(flex-start, space-around);
         }
         .header {
             height: 70px;
             width: 100%;
             background-color: #563718;
             border-bottom: 3px solid #F3C26C;
+            @include flexBox(row);
+            @include flexAlign(center, space-between);
+            padding: 15px 10px;
+            box-sizing: border-box;
+            img {
+                width: auto;
+                height: 35px;
+            }
         }
         .main-container {
             width: 100%;
@@ -33,36 +59,51 @@ html {
             width: 100%;
             height: 74px;
             background-color: #4D4136;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-            .shortCut-btn {
+            @include flexBox(row);
+            @include flexAlign(center, space-around);
+            text-align: center;
+            .shortCut-img {
                 width: 44px;
                 height: 44px;
+                position: relative;
+                margin-bottom: 3px;
+                span {
+                    width: 16px;
+                    height: 16px;
+                    position: absolute;
+                    font-size: 12px;
+                    font-weight: bold;
+                    background-color: #F3C26C;
+                    border-radius: 50px;
+                    box-sizing: border-box;
+                    padding: 2px;
+                    bottom: 0px;
+                    right: 0px;
+                }
+            }
+            p {
+                color: #DCD1C2;
+                font-size: 12px;
             }
         }
         .tabbar {
             width: 100%;
             height: 50px;
             background-color: #4A3222;
+            @include flexBox(row);
+            @include flexAlign(center, space-around);
+            a {
+                color: #DCD1C2;
+                font-size: 14px;
+                text-decoration: none;
+                @include flexBox(row);
+                @include flexAlign(center, center);
+                .tabbar-img {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
         }
-        // @include boxSizing;
-        // /* 橫向排列，且垂直置中的外觀 */
-        // @mixin flexBox($direction) {
-        //     display: flex;
-        //     flex-direction: $direction;
-        // }
-        // @mixin flexAlign($alignItems, $justifyContent) {
-        //     align-items: $alignItems;
-        //     justify-content: $justifyContent;
-        // }
-        // @mixin boxSizing {
-        //     box-sizing: border-box;
-        //     -webkit-box-sizing: border-box;
-        //     -moz-box-sizing: border-box;
-        //     -ms-box-sizing: border-box;
-        // }
         // .row {
         //     @include boxSizing;
         //     position: relative;
@@ -102,10 +143,34 @@ html {
         //     margin: 0.5rem;
         //     color: #fff;
         // }
+        .block {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .inner_block {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .media_large {
+            display: block;
+            width: 100%;
+            background: #ccc;
+        }
+        .media {
+            display: flex;
+            flex: 1;
+            margin-right: 1rem;
+            background: #aaa;
+        }
+        .media:last-child {
+            margin-right: 0;
+        }
+        .block:last-child {
+            margin-right: 0;
+        }
     }
-}
-
-* {
-    padding: 0;
-    margin: 0;
 }
