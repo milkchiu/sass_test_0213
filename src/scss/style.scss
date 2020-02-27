@@ -1,7 +1,3 @@
-.shortCut-img {
-    margin-bottom: 5px;
-}
-
 html {
     touch-action: manipulation;
     height: 100%;
@@ -20,6 +16,27 @@ html {
         -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
     }
+    /* shortCut圖片設定 */
+    $shortCut: 'shortCut_btn01',
+    'shortCut_btn02',
+    'shortCut_btn03',
+    'shortCut_btn04',
+    'shortCut_btn05';
+    @each $currentIcon in $shortCut {
+        .icon_#{$currentIcon} {
+            background: url('../img/#{$currentIcon}.png') no-repeat center;
+        }
+    }
+    /* toolbar圖片設定 */
+    $toolbar: 'icon_tabbar_home',
+    'icon_tabbar_sort',
+    'icon_tabbar_ranking',
+    'icon_tabbar_user';
+    @each $currentIcon in $toolbar {
+        .#{$currentIcon} {
+            background: url('../img/#{$currentIcon}.png') no-repeat center;
+        }
+    }
     body {
         font-family: "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         touch-action: manipulation;
@@ -34,7 +51,8 @@ html {
             width: 100%;
             height: 100%;
             @include flexBox(column);
-            @include flexAlign(flex-start, space-around);
+            @include flexAlign(flex-start,
+            space-around);
         }
         .header {
             height: 70px;
@@ -42,7 +60,8 @@ html {
             background-color: #563718;
             border-bottom: 3px solid #F3C26C;
             @include flexBox(row);
-            @include flexAlign(center, space-between);
+            @include flexAlign(center,
+            space-between);
             padding: 15px 10px;
             box-sizing: border-box;
             img {
@@ -60,12 +79,14 @@ html {
             height: 74px;
             background-color: #4D4136;
             @include flexBox(row);
-            @include flexAlign(center, space-around);
+            @include flexAlign(center,
+            space-around);
             text-align: center;
             .shortCut-img {
                 width: 44px;
                 height: 44px;
                 position: relative;
+                background-size: contain;
                 margin-bottom: 3px;
                 span {
                     width: 16px;
@@ -86,91 +107,57 @@ html {
                 font-size: 12px;
             }
         }
-        .tabbar {
-            width: 100%;
-            height: 50px;
-            background-color: #4A3222;
-            @include flexBox(row);
-            @include flexAlign(center, space-around);
-            a {
-                color: #DCD1C2;
-                font-size: 14px;
-                text-decoration: none;
-                @include flexBox(row);
-                @include flexAlign(center, center);
-                .tabbar-img {
-                    width: 32px;
-                    height: 32px;
-                }
-            }
-        }
-        // .row {
-        //     @include boxSizing;
-        //     position: relative;
-        //     width: 100%;
-        //     margin: 0;
-        //     /* &符號是sass的非變數連接字符，這裡的&.any就是 .row.any的意思 */
-        //     &.horizontal {
-        //         @include flexBox(row);
-        //         &.v_center {
-        //             @include flexAlign(center, flex-start);
-        //         }
-        //     }
-        //     /* wrap 可以確保子元素在寬度不夠時自動換行喔 */
-        //     &.wrap {
-        //         flex-wrap: wrap;
-        //     }
-        // }
-        // [data-border="all"] {
-        //     border: 1px solid #000;
-        // }
-        // @for $i from 0 through 100 {
-        //     [data-width='#{$i + "%"}'] {
-        //         width: #{$i + "%"};
-        //     }
-        // }
-        // @for $i from 1 through 100 {
-        //     [data-height="#{$i}vh"] {
-        //         height: #{$i}vh;
-        //     }
-        // }
-        // span {
-        //     @include flexBox(row);
-        //     @include flexAlign(center, center);
-        //     width: 30px;
-        //     height: 30px;
-        //     background-color: #333;
-        //     margin: 0.5rem;
-        //     color: #fff;
-        // }
         .block {
-            display: flex;
-            flex-direction: column;
+            @include flexBox(column);
             padding: 10px;
         }
         .inner_block {
             width: 100%;
-            display: flex;
-            flex-direction: row;
+            @include flexBox(row);
             justify-content: space-between;
             margin-bottom: 10px;
+        }
+        .media_large,
+        .media {
+            border-radius: 3px;
+            overflow: hidden;
         }
         .media_large {
             display: block;
             width: 100%;
-            background: #ccc;
         }
         .media {
-            display: flex;
+            @include flexBox(row);
             flex: 1;
-            margin-right: 1rem;
-            background: #aaa;
+            margin-right: 10px;
         }
         .media:last-child {
             margin-right: 0;
         }
         .block:last-child {
             margin-right: 0;
+        }
+        /* tabbar */
+        .tabbar {
+            width: 100%;
+            height: 50px;
+            background-color: #4A3222;
+            @include flexBox(row);
+            @include flexAlign(center,
+            space-around);
+            a {
+                color: #DCD1C2;
+                font-size: 14px;
+                text-decoration: none;
+                @include flexBox(row);
+                @include flexAlign(center,
+                center);
+                .tabbar-img {
+                    width: 28px;
+                    height: 28px;
+                    background-size: contain;
+                }
+            }
         }
     }
 }
